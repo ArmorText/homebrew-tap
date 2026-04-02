@@ -26,11 +26,5 @@ cask "armortext-desktop" do
                    args: ["-R", "root:staff", "#{appdir}/ArmorText.app"],
                    sudo: true
   end
-
-  zap trash: [
-    "~/Library/Logs/ArmorText",
-    "~/Library/Preferences/com.armortext.ArmorText.plist",
-    "~/Library/Saved Application State/com.armortext.ArmorText.savedState",
-  ]
   
 end
