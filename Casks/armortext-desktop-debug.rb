@@ -3,8 +3,8 @@ cask "armortext-desktop-debug" do
   sha256 "4d85240aa47e51509748bfca3cb4d2b32ea17fd0030d55bb776ccc5d273cb989"
 
   url "https://downloads.armortext.com/desktop/debug/#{version}/ArmorText-#{version}-mac64.dmg"
-  name "ArmorText"
-  desc "ArmorText Desktop Messaging Client"
+  name "ArmorText (Debug)"
+  desc "ArmorText Desktop Messaging Client (Debug Build)"
   homepage "https://armortext.com"
 
   conflicts_with cask: "armortext-desktop"
@@ -59,7 +59,7 @@ cask "armortext-desktop-debug" do
   end
 
   zap trash: [
-    "~/Library/Application Support/ArmorText/config.ini"
+    "/Library/Application Support/ArmorText"
   ]
   
 end

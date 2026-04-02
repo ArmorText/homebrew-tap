@@ -59,7 +59,7 @@ cask "armortext-desktop" do
   end
 
   zap trash: [
-    "~/Library/Application Support/ArmorText/config.ini"
+    "/Library/Application Support/ArmorText"
   ]
   
 end
