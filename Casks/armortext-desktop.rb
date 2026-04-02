@@ -9,7 +9,15 @@ cask "armortext-desktop" do
 
   app "ArmorText.app"
 
+  # For some reason this does not work on re-install
   uninstall quit: "co.armortext.desktop"
+
+  # Aggressive close at the very start of the process
+  preflight do
+    system_command "osascript",
+                   args: ["-e", 'quit app "ArmorText"'],
+                   must_succeed: false
+  end
 
   # Correcting permissions and ownership post-installation
   postflight do
