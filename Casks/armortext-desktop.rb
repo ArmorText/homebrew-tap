@@ -35,6 +35,9 @@ cask "armortext-desktop" do
     system_command "/usr/sbin/chown",
                    args: ["-R", "root:staff", "#{appdir}/ArmorText.app"],
                    sudo: true
+
+    # Open the app
+    system_command "/usr/bin/open", args: ["-b", "co.armortext.desktop"]
   end
   
 end
