@@ -17,7 +17,7 @@ cask "armortext-desktop" do
   # Aggressive close at the very start of the process
   preflight do
     system_command "osascript",
-                   args: ["-e", 'quit app "ArmorText"'],
+                   args: ["-e", 'tell application id "co.armortext.desktop" to quit'],
                    must_succeed: false
   end
 
