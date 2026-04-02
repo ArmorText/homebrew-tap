@@ -37,7 +37,7 @@ cask "armortext-desktop" do
                    sudo: true
 
     # Open the app
-    system_command "/usr/bin/open", args: ["-b", "co.armortext.desktop"]
+    system_command "/usr/bin/open", args: ["#{appdir}/ArmorText.app"]
   end
   
 end
