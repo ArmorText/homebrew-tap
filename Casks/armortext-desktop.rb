@@ -36,17 +36,28 @@ cask "armortext-desktop" do
                    args: ["-R", "root:staff", "#{appdir}/ArmorText.app"],
                    sudo: true
 
-    # Disable internal updates via config.ini
-    config_dir = File.expand_path("~/Library/Application Support/ArmorText")
-    FileUtils.mkdir_p(config_dir)
-    File.write("#{config_dir}/config.ini", "updatesEnabled = false\n")
+    config_path = "/Library/Application Support/ArmorText/config.ini"
+    config_content = "updatesEnabled = false\n"
+
+    # Create the directory
+    system_command "/bin/mkdir", 
+                   args: ["-p", File.dirname(config_path)], 
+                   sudo: true
+
+    # Write the file content using 'tee' and the 'input' parameter
+    # This pipes the Ruby string 'config_content' directly into the file via sudo
+    system_command "/usr/bin/tee", 
+                   args: [config_path], 
+                   input: config_content, 
+                   sudo: true, 
+                   print_stdout: false
 
     # Open the app
     system_command "/usr/bin/open", args: ["#{appdir}/ArmorText.app"]
   end
 
   zap trash: [
-    "~/Library/Application Support/ArmorText"
+    "~/Library/Application Support/ArmorText/config.ini"
   ]
   
 end
