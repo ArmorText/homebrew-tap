@@ -36,8 +36,17 @@ cask "armortext-desktop" do
                    args: ["-R", "root:staff", "#{appdir}/ArmorText.app"],
                    sudo: true
 
+    # Disable internal updates via config.ini
+    config_dir = File.expand_path("~/Library/Application Support/ArmorText")
+    FileUtils.mkdir_p(config_dir)
+    File.write("#{config_dir}/config.ini", "updatesEnabled = false\n")
+
     # Open the app
     system_command "/usr/bin/open", args: ["#{appdir}/ArmorText.app"]
   end
+
+  zap trash: [
+    "~/Library/Application Support/ArmorText"
+  ]
   
 end
