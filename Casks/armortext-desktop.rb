@@ -9,6 +9,8 @@ cask "armortext-desktop" do
 
   app "ArmorText.app"
 
+  uninstall quit: "co.armortext.desktop"
+
   # Correcting permissions and ownership post-installation
   postflight do
     # chmod -R ug+w ArmorText.app
