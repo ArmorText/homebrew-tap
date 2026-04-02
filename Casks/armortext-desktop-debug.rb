@@ -7,6 +7,8 @@ cask "armortext-desktop-debug" do
   desc "ArmorText Desktop Messaging Client"
   homepage "https://armortext.com"
 
+  conflicts_with cask: "armortext-desktop"
+
   app "ArmorText.app"
 
   # For some reason this does not work on re-install
