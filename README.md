@@ -33,7 +33,6 @@ We provide multiple builds of the desktop client to support different use cases.
 
 ```bash
 brew uninstall armortext-desktop
-brew cleanup --prune=all
 brew install --cask armortext/tap/armortext-desktop-debug
 ``` 
 
