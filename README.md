@@ -32,7 +32,7 @@ We provide multiple builds of the desktop client to support different use cases.
 > Both versions install to `/Applications/ArmorText.app`. You should only have one flavor installed at a time. To switch flavors, please uninstall the current version first.
 
 ```bash
-brew uninstall armortext-desktop-debug
+brew uninstall armortext-desktop
 brew cleanup --prune=all
 brew install --cask armortext/tap/armortext-desktop-debug
 ``` 
