@@ -8,4 +8,29 @@ cask "armortext-desktop" do
   homepage "https://armortext.com"
 
   app "ArmorText.app"
+
+  # Correcting permissions and ownership post-installation
+  postflight do
+    # chmod -R ug+w ArmorText.app
+    system_command "/bin/chmod",
+                   args: ["-R", "ug+w", "#{appdir}/ArmorText.app"],
+                   sudo: true
+
+    # chmod -R go+rX ArmorText.app
+    system_command "/bin/chmod",
+                   args: ["-R", "go+rX", "#{appdir}/ArmorText.app"],
+                   sudo: true
+
+    # chown -R root:staff ArmorText.app
+    system_command "/usr/sbin/chown",
+                   args: ["-R", "root:staff", "#{appdir}/ArmorText.app"],
+                   sudo: true
+  end
+
+  zap trash: [
+    "~/Library/Logs/ArmorText",
+    "~/Library/Preferences/com.armortext.ArmorText.plist",
+    "~/Library/Saved Application State/com.armortext.ArmorText.savedState",
+  ]
+  
 end
