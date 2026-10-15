@@ -35,8 +35,17 @@ cask "armortext-desktop" do
         stdin_path: "config.ini",
         sudo:       true
 
-    run "/usr/bin/open",
-        args: ["{{appdir}}/ArmorText.app"]
+    # The sandbox blocks open, and only sudo steps run outside it, so drop
+    # back to the installing user to launch the app as them, not as root
+    run "/bin/sh",
+        args:         [
+          "-c",
+          'exec /bin/launchctl asuser "$SUDO_UID" /usr/bin/sudo -u "$SUDO_USER" /usr/bin/open "$1"',
+          "sh",
+          "{{appdir}}/ArmorText.app",
+        ],
+        sudo:         true,
+        must_succeed: false
   end
 
   # For some reason this does not work on re-install
