@@ -5,61 +5,42 @@ cask "armortext-desktop" do
   url "https://downloads.armortext.com/desktop/release/#{version}/ArmorText-#{version}-mac64.dmg"
   name "ArmorText"
   desc "ArmorText Desktop Messaging Client"
-  homepage "https://armortext.com"
+  homepage "https://armortext.com/"
 
   conflicts_with cask: "armortext-desktop-debug"
+  depends_on :macos
 
   app "ArmorText.app"
+
+  # Aggressive close at the very start of the process
+  preflight_steps do
+    run "/usr/bin/osascript",
+        args:         ["-e", 'tell application id "co.armortext.desktop" to quit'],
+        must_succeed: false
+  end
+
+  # Correcting permissions and ownership post-installation
+  postflight_steps do
+    set_permissions "{{appdir}}/ArmorText.app", "ug+w"
+    set_permissions "{{appdir}}/ArmorText.app", "go+rX"
+    set_ownership "{{appdir}}/ArmorText.app", user: "root"
+
+    # write_file cannot use sudo, so stage the content and copy it into place with tee
+    write_file "config.ini", "updatesEnabled = false\n"
+    run "/bin/mkdir",
+        args: ["-p", "/Library/Application Support/ArmorText"],
+        sudo: true
+    run "/usr/bin/tee",
+        args:       ["/Library/Application Support/ArmorText/config.ini"],
+        stdin_path: "config.ini",
+        sudo:       true
+
+    run "/usr/bin/open",
+        args: ["{{appdir}}/ArmorText.app"]
+  end
 
   # For some reason this does not work on re-install
   uninstall quit: "co.armortext.desktop"
 
-  # Aggressive close at the very start of the process
-  preflight do
-    system_command "osascript",
-                   args: ["-e", 'tell application id "co.armortext.desktop" to quit'],
-                   must_succeed: false
-  end
-
-  # Correcting permissions and ownership post-installation
-  postflight do
-    # chmod -R ug+w ArmorText.app
-    system_command "/bin/chmod",
-                   args: ["-R", "ug+w", "#{appdir}/ArmorText.app"],
-                   sudo: true
-
-    # chmod -R go+rX ArmorText.app
-    system_command "/bin/chmod",
-                   args: ["-R", "go+rX", "#{appdir}/ArmorText.app"],
-                   sudo: true
-
-    # chown -R root:staff ArmorText.app
-    system_command "/usr/sbin/chown",
-                   args: ["-R", "root:staff", "#{appdir}/ArmorText.app"],
-                   sudo: true
-
-    config_path = "/Library/Application Support/ArmorText/config.ini"
-    config_content = "updatesEnabled = false\n"
-
-    # Create the directory
-    system_command "/bin/mkdir", 
-                   args: ["-p", File.dirname(config_path)], 
-                   sudo: true
-
-    # Write the file content using 'tee' and the 'input' parameter
-    # This pipes the Ruby string 'config_content' directly into the file via sudo
-    system_command "/usr/bin/tee", 
-                   args: [config_path], 
-                   input: config_content, 
-                   sudo: true, 
-                   print_stdout: false
-
-    # Open the app
-    system_command "/usr/bin/open", args: ["#{appdir}/ArmorText.app"]
-  end
-
-  zap trash: [
-    "/Library/Application Support/ArmorText"
-  ]
-  
+  zap trash: "/Library/Application Support/ArmorText"
 end
