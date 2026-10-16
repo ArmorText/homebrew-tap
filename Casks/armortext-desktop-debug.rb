@@ -24,8 +24,14 @@ cask "armortext-desktop-debug" do
 
   # Correcting permissions and ownership post-installation
   postflight_steps do
-    set_permissions "{{appdir}}/ArmorText.app", "ug+w"
-    set_permissions "{{appdir}}/ArmorText.app", "go+rX"
+    # Upgrades keep the existing app folder, which the last install made
+    # root-owned, so changing its mode needs sudo as well
+    run "/bin/chmod",
+        args: ["-R", "ug+w", "{{appdir}}/ArmorText.app"],
+        sudo: true
+    run "/bin/chmod",
+        args: ["-R", "go+rX", "{{appdir}}/ArmorText.app"],
+        sudo: true
     set_ownership "{{appdir}}/ArmorText.app", user: "root"
 
     # write_file cannot use sudo, so stage the content and copy it into place with tee
