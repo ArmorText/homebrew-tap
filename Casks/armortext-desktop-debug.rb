@@ -2,8 +2,8 @@ cask "armortext-desktop-debug" do
   arch arm: "mac64a", intel: "mac64"
 
   version "0.37.1"
-  sha256 arm:   "843136d9d6f52df9efa507123e8840ba9e93969731aef133c28e8b6126eac9b0",
-         intel: "99f5b88006e5ed6b47f26a63536cc85354d4d5b5674056e821689fa7826da79e"
+  sha256 arm:   "f2b39fe5c68866427a042e4ed0f9488c35458971dea51cbe4eb61c387e0e4f52",
+         intel: "78e00dd1610a8125778728b9ca031f6689617c293f9ca2b9bc54c5c11bba8f25"
 
   url "https://cdn.armortext.com/development/downloads/desktop/debug/#{version}/ArmorText-#{version}-#{arch}.dmg"
   name "ArmorText (Debug)"
