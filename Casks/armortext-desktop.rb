@@ -1,11 +1,8 @@
 cask "armortext-desktop" do
-  arch arm: "mac64a", intel: "mac64"
-
   version "0.37.1"
-  sha256 arm:   "fc3b8df35812249068c6f784aba8fff97871ff6920c6a92e9b71c3fe619290ee",
-         intel: "2b69a7ad8b82db5a827614d02fba048b8e49a50abed2ff025125a92e680b23ff"
+  sha256 "eec1a40df3bda6d17b6c71b195f5d58f63ec061eda86fc542baff59824ee3844"
 
-  url "https://cdn.armortext.com/development/downloads/desktop/release/#{version}/ArmorText-#{version}-#{arch}.dmg"
+  url "https://cdn.armortext.com/development/downloads/desktop/release/#{version}/ArmorText-#{version}-mac64u.dmg"
   name "ArmorText"
   desc "ArmorText Desktop Messaging Client"
   homepage "https://armortext.com/"
