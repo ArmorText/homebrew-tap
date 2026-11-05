@@ -2,8 +2,8 @@ cask "armortext-desktop" do
   arch arm: "mac64a", intel: "mac64"
 
   version "0.37.3"
-  sha256 arm:   "0c0f45277480bb186ddb8fd55a1f946952c5400b33cff7491de5ab41dec70403",
-         intel: "ba7b8fd7d8473cdb6827ea768aa2069eafab82bafe92e9b41d751acfa541a987"
+  sha256 arm:   "9a12c69ce47486c8e1229f60009e8d10d926583b26823cb8b33828e9324a110a",
+         intel: "df702e9a91e8fd8f78b8883e88f2536ffeba5304a86a1e4c7ad67e5348b2ebb1"
 
   url "https://cdn.armortext.com/development/downloads/desktop/release/#{version}/ArmorText-#{version}-#{arch}.dmg"
   name "ArmorText"
