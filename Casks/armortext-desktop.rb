@@ -1,6 +1,6 @@
 cask "armortext-desktop" do
-  version "0.37.3"
-  sha256 "64291bc718f5b2fafde7be311a2aeb10d4ec8dce532222e7d8e8b2644cce01c3"
+  version "0.37.5"
+  sha256 "9b7607c297440280cc98d369558db2946df96a994a8a1d976223a1a98f155d06"
 
   url "https://cdn.armortext.com/development/downloads/desktop/release/#{version}/ArmorText-#{version}-mac64u.dmg"
   name "ArmorText"
