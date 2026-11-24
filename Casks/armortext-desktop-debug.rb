@@ -1,6 +1,6 @@
 cask "armortext-desktop-debug" do
-  version "0.37.7"
-  sha256 "378f197d8852e16ab72832842392e07b1acd1b4c4a79b9722afaeb2bc787c107"
+  version "0.37.9"
+  sha256 "81116398b5c2e564e46ebb10cda46fddcc5dd0e4acb5d63149ab52ae1b302b2a"
 
   url "https://cdn.armortext.com/development/downloads/desktop/debug/#{version}/ArmorText-#{version}-mac64u.dmg"
   name "ArmorText (Debug)"
